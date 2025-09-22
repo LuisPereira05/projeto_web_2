@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Inserir Curso</title>
+</head>
+<body>
+    <h2>Inserir Curso</h2>
+    <form method="post" enctype="multipart/form-data">
+        Nome:<input type="text" name="nome"/> <br />
+        Descrição:<input type="text" name="descricao"/> <br />
+        Data de Início:<input type="datetime-local" name="data_inicio"/> <br />
+        Data do Final:<input type="datetime-local" name="data_final"/> <br />
+        Imagem: <input type="file" name="file" /> <br />
+        Professor:
+        <select name="professor_ID" id="professor">
+            <option value="">-- Selecione o Professor --</option>
+            <option th:each="prof : ${professores}"
+                    th:value="${prof.id}"
+                    th:text="${prof.nome}">
+            </option>
+        </select>
+        <br />
+		Categoría:
+        <select name="categoria_ID" id="categoria">
+            <option value="">-- Selecione a Categoria --</option>
+            <option th:each="cat : ${categorias}"
+                    th:value="${cat.id}"
+                    th:text="${cat.nome}">
+            </option>
+        </select>
+        <br />
+        <button type="submit">Enviar</button>	
+    </form>
+</body>
+</html>

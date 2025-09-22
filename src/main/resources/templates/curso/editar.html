@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Editar Curso</title>
+</head>
+<body>
+    <h2>Editar Curso</h2>
+    <form method="post" enctype="multipart/form-data">
+        <input type="hidden" name="id" th:value="${id}" />
+
+        Nome:
+        <input type="text" name="nome" th:value="${nome}" /> <br />
+
+        Descrição:
+        <input type="text" name="descricao" th:value="${descricao}" /> <br />
+
+        Data de Início:
+        <input type="datetime-local" name="data_inicio"
+               th:value="${data_inicio}" /> <br />
+
+        Data do Final:
+        <input type="datetime-local" name="data_final"
+               th:value="${data_final}" /> <br />
+
+		Imagem atual: <br />
+		<img th:if="${img != null}" th:src="@{/img/{file}(file=${img})}" alt="Imagem do curso" width="200" /> <br>
+		<span th:if="${img == null}">Nenhuma</span>
+        Alterar imagem:
+        <input type="file" name="file" /> <br />
+
+        Professor:
+        <select name="professor_ID" id="professor">
+            <option value="">-- Selecione o Professor --</option>
+            <option th:each="prof : ${professores}"
+                    th:value="${prof.id}"
+                    th:text="${prof.nome}"
+                    th:selected="${prof.id} == ${professor.id}">
+            </option>
+        </select>
+        <br />
+
+        Categoria:
+        <select name="categoria_ID" id="categoria">
+            <option value="">-- Selecione a Categoria --</option>
+            <option th:each="cat : ${categorias}"
+                    th:value="${cat.id}"
+                    th:text="${cat.nome}"
+                    th:selected="${cat.id}">
+            </option>
+        </select>
+        <br />
+
+        <button type="submit">Enviar</button>
+    </form>
+</body>
+</html>
