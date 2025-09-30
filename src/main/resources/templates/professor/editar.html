@@ -1,15 +1,21 @@
 <!DOCTYPE html>
-<html xlms:th="http://www.thymeleaf.org">
-	<head>
-	</head>
-	<body>
-		<h2>Editar Professor</h2>
-		<form method="post">
-			Nome:<input type="text" name="nome" 
-			th:value="${nome}"/> <br />
-			Email:<input type="email" name="email" 
-			th:value="${email}"/> <br />
-			<button type="submit">Enviar</button>	
-		</form>
-	</body>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Professor</title>
+    <link th:href="@{/styles.css}" rel="stylesheet">
+</head>
+<body class="editar-body">
+
+    <h2>Editar Professor</h2>
+
+    <form method="post">
+        Nome: <input type="text" name="nome" th:value="${nome}" /> <br /><br />
+        Email: <input type="email" name="email" th:value="${email}" /> <br /><br />
+        <button type="submit">Enviar</button>    
+    </form>
+
+    <a th:href="@{/professor/listar}" class="back-arrow">&#8592; Voltar</a>
+
+</body>
 </html>

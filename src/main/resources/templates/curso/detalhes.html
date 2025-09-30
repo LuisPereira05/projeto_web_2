@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${curso.nome}">Detalhes do Curso</title>
+    <link th:href="@{/styles.css}" rel="stylesheet">
+</head>
+<body>
+    <div class="page-container">
+
+        <!-- Barra lateral de categorias -->
+        <aside class="nav-bar">
+            <h3>Categorias</h3>
+            <ul th:each="categoria : ${categorias}">
+                <li>
+                    <a th:href="@{/curso/ofCategoria/{id}(id=${categoria.id})}" th:text="${categoria.nome}"></a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Conteúdo principal do curso -->
+        <main class="curso-detalhes-container">
+            <!-- Voltar para home -->
+            <a th:href="@{/home}" class="back-button">&#8592; Voltar</a>
+
+            <!-- Imagem do curso -->
+            <div class="curso-image">
+                <img th:src="@{'/img/' + ${curso.img}}" alt="Imagem do curso">
+            </div>
+
+            <!-- Informações do curso -->
+            <div class="curso-info">
+                <h1 th:text="${curso.nome}"></h1>
+
+                <p><strong>ID:</strong> <span th:text="${curso.id}"></span></p>
+                <p><strong>Categoria:</strong> <span th:text="${curso.categoria.nome}"></span></p>
+                <p><strong>Professor:</strong> <span th:text="${curso.professor.nome}"></span></p>
+                <p><strong>Descrição:</strong></p>
+                <p th:text="${curso.descricao}"></p>
+                <p><strong>Data de Início:</strong> <span th:text="${#temporals.format(curso.data_inicio, 'dd/MM/yyyy HH:mm')}"></span></p>
+                <p><strong>Data Final:</strong> <span th:text="${#temporals.format(curso.data_final, 'dd/MM/yyyy HH:mm')}"></span></p>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

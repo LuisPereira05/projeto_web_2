@@ -45,6 +45,28 @@ public class CursoController {
 
 	@Autowired
 	CategoriaRepository categoriaRepository;
+
+	@GetMapping("/ofCategoria/{id}")
+	public ModelAndView deCategoria(@PathVariable Long id) {
+		List<Curso> cursos = repository.findByCategoriaId(id);
+		ModelAndView mv = new ModelAndView("/index");
+		mv.addObject("cursos", cursos);
+		mv.addObject("categorias", categoriaRepository.findAll());
+		mv.addObject("isSearch", true);
+		return mv;
+	}
+
+	@GetMapping("/{id}")
+	public ModelAndView detalhes(@PathVariable Long id) {
+		Curso curso = repository.findById(id)
+								.orElseThrow(() -> new IllegalArgumentException("Curso não encontrado"));
+
+		ModelAndView mv = new ModelAndView("/curso/detalhes");
+		mv.addObject("curso", curso);
+		mv.addObject("categorias", categoriaRepository.findAll());
+		return mv;
+	}
+
 	
 	@GetMapping("/inserir")
 	public String inserir(Model profModel, Model catModel) {

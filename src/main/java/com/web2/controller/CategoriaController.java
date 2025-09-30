@@ -48,6 +48,8 @@ public class CategoriaController {
 		msg.addFlashAttribute("inserirok", "Usuário inserido!");
 		return "redirect:/categoria/listar";
 	}
+
+	
 	
 	
 	@GetMapping("/listar")

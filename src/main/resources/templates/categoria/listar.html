@@ -1,28 +1,43 @@
 <!DOCTYPE html>
-<html xlms:th="http://www.thymeleaf.org">
-<head></head>
-<body>
-<th:block th:include="categoria/msg"></th:block>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Categorias</title>
+    <link th:href="@{/styles.css}" rel="stylesheet">
+</head>
+<body class="listar-body">
+    <form method="post" class="search-form">
+        <label for="busca">Busca:</label>
+        <input type="text" id="busca" name="busca" placeholder="Digite o nome da categoria" />
+        <button type="submit" class="btn">Enviar</button>
+    </form>
+	
+	<a th:href="@{/home}" class="back-arrow">
+        &#8592; Voltar
+    </a>
 
-<form method="post">
-	Busca: <input type="text" name="busca" />
-	<button type="submit">Enviar</button>
-</form>
-	<table border="1">
-		<thead>
-			<th>ID</th>
-			<th>Nome</th>
-		</thead>
-		<tbody>
-			<tr th:each="categoria: ${categorias}">
-				<td th:text="${categoria.id}"></td>
-				<td th:text="${categoria.nome}"></td>
-				<td><a th:href="@{/categoria/editar/{id}(id=${categoria.id})}">Editar</a></td>
-				<td><a th:href="@{/categoria/excluir/{id}(id=${categoria.id})}">Excluir</a></td>
-			</tr>
-			
-		</tbody>
-	</table>
-			
+    <!-- Tabela de categorias -->
+    <div class="table-container">
+        <table class="categoria-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="categoria: ${categorias}">
+                    <td th:text="${categoria.id}"></td>
+                    <td th:text="${categoria.nome}"></td>
+                    <td class="actions">
+                        <a th:href="@{/categoria/editar/{id}(id=${categoria.id})}" class="btn edit-btn">Editar</a>
+                        <a th:href="@{/categoria/excluir/{id}(id=${categoria.id})}" class="btn delete-btn">Excluir</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
 </body>
 </html>
